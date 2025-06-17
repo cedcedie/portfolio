@@ -612,29 +612,29 @@
     <div class="scroll-progress"></div>
 
     <!-- Hero Section -->
-    <section id="home" class="min-h-screen flex items-center gradient-bg">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
-            <div class="hero-content">
-                <h1 class="hero-title text-5xl md:text-6xl font-bold mb-4">
-                    Hi, I'm <span class="typing-effect">Cydric James Bulan</span>
-                </h1>
-                <p class="hero-subtitle text-xl md:text-2xl mb-8 opacity-90">
-                    Aspiring Frontend Developer & UI Enthusiast
-                </p>
-                <p class="text-lg mb-8 opacity-80 max-w-2xl mx-auto">
-                    A passionate student at STI Balagtas, crafting modern web experiences with a focus on clean design and user interaction
-                </p>
-                <div class="space-x-4">
-                    <a href="#projects" class="btn-primary px-8 py-3 rounded-full font-semibold inline-block">
-                        View My Work
-                    </a>
-                    <a href="#contact" class="btn-outline text-white px-8 py-3 rounded-full font-semibold inline-block">
-                        Let's Connect
-                    </a>
-                </div>
+   <section id="home" class="min-h-screen flex items-center gradient-bg text-white">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div class="hero-content">
+            <h1 class="hero-title text-5xl md:text-6xl font-bold mb-4">
+                Hi, I'm <span class="typing-effect">Cydric James Bulan</span>
+            </h1>
+            <p class="hero-subtitle text-xl md:text-2xl mb-8">
+                Aspiring Frontend Developer & UI Enthusiast
+            </p>
+            <p class="text-lg mb-8 max-w-2xl mx-auto">
+                A passionate student at STI Balagtas, crafting modern web experiences with a focus on clean design and user interaction
+            </p>
+            <div class="space-x-4">
+                <a href="#projects" class="btn-primary px-8 py-3 rounded-full font-semibold inline-block">
+                    View My Work
+                </a>
+                <a href="#contact" class="btn-outline text-white px-8 py-3 rounded-full font-semibold inline-block border border-white hover:bg-white hover:text-black transition">
+                    Let's Connect
+                </a>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
     <div class="section-divider"></div>
 
@@ -780,7 +780,7 @@
                     <i class="fab fa-css3-alt text-4xl text-[#264DE4] mb-3"></i>
                     <p class="font-semibold text-gray-300">CSS3</p>
                     <div class="skill-progress">
-                        <div class="skill-progress-bar" style="width: 95%"></div>
+                        <div class="skill-progress-bar" style="width: 80%"></div>
                     </div>
                 </div>
                 <div class="skill-item p-6 rounded-lg text-center">
@@ -1106,26 +1106,33 @@
         const sections = document.querySelectorAll('section');
         const navLinks = document.querySelectorAll('.nav-link');
 
-        function updateActiveSection() {
-            let currentActive = '';
+       function updateActiveSection() {
+    let currentActive = '';
+    const scrollY = window.pageYOffset;
+    const windowHeight = window.innerHeight;
+    const documentHeight = document.documentElement.scrollHeight;
 
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                const sectionHeight = section.clientHeight;
-                // Adjust scroll position to activate section slightly before it reaches the very top
-                if (pageYOffset >= sectionTop - 100 && pageYOffset < sectionTop + sectionHeight - 100) {
-                    currentActive = section.getAttribute('id');
-                }
-            });
+    sections.forEach((section, index) => {
+        const sectionTop = section.offsetTop - 80;
+        const sectionHeight = section.clientHeight;
+        const sectionBottom = sectionTop + sectionHeight;
 
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href').includes(currentActive)) {
-                    link.classList.add('active');
-                }
-            });
+        // Ensure the last section (usually contact) gets activated properly
+        if (
+            (scrollY >= sectionTop && scrollY < sectionBottom) ||
+            (index === sections.length - 1 && (scrollY + windowHeight) >= documentHeight - 5)
+        ) {
+            currentActive = section.getAttribute('id');
         }
+    });
 
+    navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href').includes(currentActive)) {
+            link.classList.add('active');
+        }
+    });
+}
         // Attach the update function to scroll and load events
         window.addEventListener('scroll', updateActiveSection);
         window.addEventListener('load', updateActiveSection);
