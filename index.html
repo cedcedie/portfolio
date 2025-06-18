@@ -589,9 +589,7 @@
                 padding: 0;
             }
             .timeline-item {
-                display: flex;
-                flex-direction: row;
-                align-items: flex-start;
+                display: block;
                 width: 100vw !important;
                 left: 0 !important;
                 padding: 0 0 2.5rem 0 !important;
@@ -599,51 +597,22 @@
                 background: transparent;
             }
             .timeline-side {
-                width: 40px;
-                min-width: 40px;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                position: relative;
-            }
-            .timeline-vertical-line {
-                position: absolute;
-                top: 0;
-                left: 50%;
-                transform: translateX(-50%);
-                width: 3px;
-                height: 100%;
-                background: var(--accent-color);
-                z-index: 0;
-            }
-            .timeline-point {
-                width: 18px;
-                height: 18px;
-                background: var(--accent-color);
-                border-radius: 50%;
-                border: 3px solid #fff;
-                box-shadow: 0 2px 8px rgba(0,0,0,0.12);
-                position: relative;
-                z-index: 2;
-                margin-top: 0.5rem;
-                margin-bottom: 0.5rem;
+                display: none;
             }
             .timeline-content {
                 background: var(--card-bg);
                 border-radius: 8px;
                 padding: 1.25rem;
-                width: 80vw;
-                max-width: 80vw;
+                width: 90vw;
+                max-width: 90vw;
                 box-sizing: border-box;
                 text-align: center;
                 position: relative;
                 z-index: 1;
-                margin-left: 0.5rem;
+                margin: 0 auto 1.5rem auto;
             }
-        }
-        @media (min-width: 768px) {
-            .timeline-point {
-                display: none !important;
+            .timeline .timeline-vertical-line {
+                height: 20px !important;
             }
         }
         /* Back to Top Button */
@@ -1035,7 +1004,7 @@
                     <div class="timeline-item w-full">
                         <div class="timeline-side">
                             <div class="timeline-vertical-line"></div>
-                            <span class="hidden md:block"><div class="timeline-point"></div></span>
+                            <div class="timeline-point"></div>
                         </div>
                         <div class="timeline-content">
                             <h3 class="text-lg md:text-xl font-bold mb-2">Java Fundamentals</h3>
@@ -1046,7 +1015,7 @@
                     <div class="timeline-item w-full">
                         <div class="timeline-side">
                             <div class="timeline-vertical-line"></div>
-                            <span class="hidden md:block"><div class="timeline-point"></div></span>
+                            <div class="timeline-point"></div>
                         </div>
                         <div class="timeline-content">
                             <h3 class="text-lg md:text-xl font-bold mb-2">C# WinForms</h3>
@@ -1057,7 +1026,7 @@
                     <div class="timeline-item w-full">
                         <div class="timeline-side">
                             <div class="timeline-vertical-line"></div>
-                            <span class="hidden md:block"><div class="timeline-point"></div></span>
+                            <div class="timeline-point"></div>
                         </div>
                         <div class="timeline-content">
                             <h3 class="text-lg md:text-xl font-bold mb-2">Web Development Fundamentals</h3>
@@ -1068,7 +1037,7 @@
                     <div class="timeline-item w-full">
                         <div class="timeline-side">
                             <div class="timeline-vertical-line"></div>
-                            <span class="hidden md:block"><div class="timeline-point"></div></span>
+                            <div class="timeline-point"></div>
                         </div>
                         <div class="timeline-content">
                             <h3 class="text-lg md:text-xl font-bold mb-2">Backend Development with PHP & Laravel</h3>
@@ -1076,7 +1045,7 @@
                             <p class="text-sm text-gray-400 mt-2">2025</p>
                         </div>
                     </div>
-                    <div class="timeline-item w-full">
+                    <div class="timeline-item last w-full">
                         <div class="timeline-side">
                             <!-- No vertical line or dot for the last item -->
                         </div>
