@@ -1477,6 +1477,7 @@ html {
   left: 0;
   width: 100%;
   pointer-events: none;
+  z-index: 1;
 }
 
 .project-slide.active {
@@ -1485,6 +1486,7 @@ html {
   box-shadow: var(--shadow-md);
   pointer-events: auto;
   position: relative;
+  z-index: 2;
 }
 
 .project-image {

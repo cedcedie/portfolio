@@ -366,11 +366,12 @@ const setSlide = (idx, skipAnimation = false) => {
     if (skipAnimation || (prevSlideEl && activeSlideEl && prevSlideEl === activeSlideEl)) {
         // First load or same slide - no animation
         slides.forEach((s, i) => {
-            s.classList.toggle('active', i === currentSlide);
-            if (i === currentSlide) {
-                gsap.set(s, { opacity: 1 });
+            const isActive = i === currentSlide;
+            s.classList.toggle('active', isActive);
+            if (isActive) {
+                gsap.set(s, { opacity: 1, zIndex: 2 });
             } else {
-                gsap.set(s, { opacity: 0 });
+                gsap.set(s, { opacity: 0, zIndex: 1 });
             }
         });
     } else if (prevSlideEl && activeSlideEl && prevSlideEl !== activeSlideEl) {
@@ -530,6 +531,16 @@ document.addEventListener('DOMContentLoaded', () => {
     initScrollAnimations();
     
     // Carousel init - start with Case No Zero (index 0) without animation
+    // First, ensure all slides are hidden except the first one
+    slides.forEach((slide, i) => {
+        if (i === 0) {
+            slide.classList.add('active');
+            gsap.set(slide, { opacity: 1, zIndex: 2 });
+        } else {
+            slide.classList.remove('active');
+            gsap.set(slide, { opacity: 0, zIndex: 1 });
+        }
+    });
     renderDots();
     setSlide(0, true); // true = skip animation on initial load
     if (prevBtn) prevBtn.addEventListener('click', prevSlide);
