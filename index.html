@@ -1,766 +1,145 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cydric James Bulan - Frontend Developer</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
     <style>
         :root {
-            --primary-color: #1a1b26;
-            --secondary-color: #24283b;
-            --accent-color: #7aa2f7;
-            --accent-color-2: #bb9af7;
-            --dark-bg: #1a1b26;
-            --darker-bg: #16161e;
-            --card-bg: #24283b;
-            --text-primary: #ffffff;
-            --text-secondary: #a9b1d6;
-            --vs-bg: #1a1b26;
-            --vs-sidebar: #24283b;
-            --vs-active: #414868;
-            --vs-text: #c0caf5;
-            --vs-blue: #7aa2f7;
-            --vs-green: #9ece6a;
-            --vs-yellow: #e0af68;
-            --vs-orange: #f7768e;
-        }
-
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: var(--dark-bg);
-            color: var(--text-primary);
-            scroll-behavior: smooth;
-            position: relative;
-            overflow-x: hidden;
-        }
-
-        .bg-pattern {
-            display: none;
-            pointer-events: none;
-        }
-
-        .bg-noise {
-            display: none;
-            pointer-events: none;
-        }
-
-        .gradient-bg {
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .gradient-bg::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: radial-gradient(circle at center, rgba(0, 112, 243, 0.15) 0%, transparent 70%);
-            animation: pulse 8s ease-in-out infinite;
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        .gradient-text {
-            background: linear-gradient(135deg, var(--accent-color) 0%, #90cdf4 100%);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .navbar-blur {
-            backdrop-filter: blur(10px);
-            background: rgba(13, 17, 23, 0.8);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .nav-link {
-            position: relative;
-            transition: all 0.3s ease;
-            padding: 0.5rem 1rem;
-            border-radius: 0.5rem;
-        }
-
-        .nav-link:hover {
-            background: rgba(0, 112, 243, 0.1);
-        }
-
-        .nav-link.active {
-            background: rgba(0, 112, 243, 0.2);
-            color: var(--text-primary) !important;
-            box-shadow: 0 0 10px rgba(122, 162, 247, 0.5);
-        }
-
-        .card {
-            background: var(--card-bg);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: transform 0.3s cubic-bezier(0.4,0,0.2,1), box-shadow 0.3s cubic-bezier(0.4,0,0.2,1);
-        }
-
-        .card:hover, .skill-item:hover {
-            transform: scale(1.08);
-            box-shadow: 0 16px 40px rgba(122,162,247,0.18);
-        }
-
-        .skill-item {
-            background: var(--card-bg);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: transform 0.3s cubic-bezier(0.4,0,0.2,1), box-shadow 0.3s cubic-bezier(0.4,0,0.2,1);
-        }
-
-        .skill-item:hover {
-            transform: scale(1.08);
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, var(--accent-color) 0%, #90cdf4 100%);
-            transition: all 0.3s ease;
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px) scale(1.02);
-            box-shadow: 0 10px 20px rgba(99, 179, 237, 0.3);
-        }
-
-        .btn-outline {
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            transition: all 0.3s ease;
-        }
-
-        .btn-outline:hover {
-            border-color: var(--primary-color);
-            background: rgba(0, 112, 243, 0.1);
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 0.5; }
-            50% { opacity: 1; }
-        }
-
-        .typing-effect {
-            border-right: 2px solid var(--primary-color);
-            animation: blink 1s infinite;
-        }
-
-        @keyframes blink {
-            0%, 50% { border-color: transparent; }
-            51%, 100% { border-color: var(--primary-color); }
-        }
-
-        .social-icon {
-            transition: all 0.3s ease;
-        }
-
-        .social-icon:hover {
-            transform: scale(1.2);
-            color: var(--accent-color);
-            text-shadow: 0 0 10px rgba(122, 162, 247, 0.5);
-        }
-
-        .scroll-progress {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 3px;
-            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
-            transform-origin: 0 50%;
-            transform: scaleX(0);
-            z-index: 50;
-        }
-
-        .section-divider {
-            display: none;
-        }
-
-        .particles {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        .particle {
-            position: absolute;
-            width: 2px;
-            height: 2px;
-            background: var(--primary-color);
-            border-radius: 50%;
-            opacity: 0.3;
-            animation: float 20s infinite linear;
-        }
-
-        @keyframes float {
-            0% { transform: translateY(0) translateX(0) rotate(0deg); }
-            25% { transform: translateY(-20px) translateX(10px) rotate(5deg); }
-            50% { transform: translateY(-40px) translateX(-10px) rotate(0deg); }
-            75% { transform: translateY(-20px) translateX(-20px) rotate(-5deg); }
-            100% { transform: translateY(0) translateX(0) rotate(0deg); }
-        }
-
-        @keyframes glow {
-            0%, 100% { box-shadow: 0 0 20px rgba(99, 179, 237, 0.2); }
-            50% { box-shadow: 0 0 30px rgba(99, 179, 237, 0.4); }
-        }
-
-        @keyframes slideIn {
-            from { transform: translateX(-100%); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
-        }
-
-        @keyframes fadeInUp {
-            from { transform: translateY(20px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 2;
-            opacity: 0;
-            animation: fadeInUp 1s ease-out forwards;
-        }
-
-        @keyframes fadeInUp {
-            0% { 
-                opacity: 0;
-                transform: translateY(50px);
-            }
-            100% { 
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .card {
-            animation: fadeInUp 0.6s ease-out;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .card:hover {
-            transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 20px 40px rgba(122, 162, 247, 0.2);
-        }
-
-        .vs-container {
-            background: var(--vs-bg);
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            font-family: 'Consolas', 'Monaco', monospace;
-            transition: all 0.3s ease;
-            height: 100%;
-            min-height: 400px;
-        }
-
-        .vs-container:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
-        }
-
-        .vs-header {
-            background: var(--vs-sidebar);
-            padding: 8px 16px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .vs-dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-        }
-
-        .vs-dot.red { background: #ff5f56; }
-        .vs-dot.yellow { background: #ffbd2e; }
-        .vs-dot.green { background: #27c93f; }
-
-        .vs-content {
-            padding: 20px;
-            color: var(--vs-text);
-            line-height: 1.6;
-            height: calc(100% - 40px);
-            overflow-y: auto;
-        }
-
-        .vs-line {
-            display: flex;
-            margin: 4px 0;
-            opacity: 0;
-            animation: typeIn 0.8s ease-out forwards;
-        }
-
-        .vs-line:nth-child(1) { animation-delay: 0.2s; }
-        .vs-line:nth-child(2) { animation-delay: 0.4s; }
-        .vs-line:nth-child(3) { animation-delay: 0.6s; }
-        .vs-line:nth-child(4) { animation-delay: 0.8s; }
-        .vs-line:nth-child(5) { animation-delay: 1.0s; }
-        .vs-line:nth-child(6) { animation-delay: 1.2s; }
-        .vs-line:nth-child(7) { animation-delay: 1.4s; }
-        .vs-line:nth-child(8) { animation-delay: 1.6s; }
-        .vs-line:nth-child(9) { animation-delay: 1.8s; }
-        .vs-line:nth-child(10) { animation-delay: 2.0s; }
-        .vs-line:nth-child(11) { animation-delay: 2.2s; }
-        .vs-line:nth-child(12) { animation-delay: 2.4s; }
-
-        .vs-line-number {
-            color: var(--vs-text);
-            opacity: 0.5;
-            padding-right: 16px;
-            user-select: none;
-            min-width: 30px;
-        }
-
-        .vs-keyword { color: var(--vs-blue); }
-        .vs-string { color: var(--vs-orange); }
-        .vs-comment { color: var(--vs-green); }
-        .vs-function { color: var(--vs-yellow); }
-
-        @keyframes typeIn {
-            from { 
-                opacity: 0;
-                transform: translateX(-20px);
-            }
-            to { 
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        .hero-content {
-            animation: fadeInUp 1s ease-out;
-        }
-
-        .about-content {
-            animation: slideInLeft 1.5s ease-out;
-        }
-
-        .vs-code-profile {
-            animation: slideInRight 1.5s ease-out;
-        }
-
-        @keyframes slideInLeft {
-            from { 
-                opacity: 0;
-                transform: translateX(-100px);
-            }
-            to { 
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        @keyframes slideInRight {
-            from { 
-                opacity: 0;
-                transform: translateX(100px);
-            }
-            to { 
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        .card {
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .card:hover {
-            transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 20px 40px rgba(122, 162, 247, 0.2);
-        }
-
-        .skill-item {
-            transition: transform 0.3s ease;
-        }
-
-        .skill-item:hover {
-            transform: scale(1.1);
-        }
-
-        .social-icon {
-            transition: all 0.3s ease;
-        }
-
-        .social-icon:hover {
-            transform: scale(1.2);
-            color: var(--accent-color);
-            text-shadow: 0 0 10px rgba(122, 162, 247, 0.5);
-        }
-
-        .section-divider {
-            display: none;
-        }
-
-        .hero-title, .hero-subtitle, .text-white {
-            color: var(--text-primary) !important;
-        }
-
-        .text-gray-300 {
-            color: var(--text-secondary) !important;
-        }
-
-        .gradient-bg {
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-        }
-
-        .gradient-text {
-            background: linear-gradient(135deg, var(--accent-color) 0%, #90cdf4 100%);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, var(--accent-color) 0%, #90cdf4 100%);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px) scale(1.02);
-            box-shadow: 0 10px 20px rgba(99, 179, 237, 0.3);
-        }
-
-        .skill-item {
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .skill-item:hover {
-            transform: translateY(-5px) scale(1.05) rotate(2deg);
-            box-shadow: 0 10px 30px rgba(99, 179, 237, 0.2);
-        }
-
-        .about-content {
-            animation: slideInLeft 1.5s ease-out;
-        }
-
-        .vs-code-profile {
-            animation: slideInRight 1.5s ease-out;
-        }
-
-        .timeline-section {
-            padding: 4rem 0;
-            background: var(--darker-bg);
-        }
-
-        .timeline {
-            position: relative;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .timeline::after {
-            content: '';
-            position: absolute;
-            width: 2px;
-            background: var(--accent-color);
-            top: 0;
-            bottom: 0;
-            left: 50%;
-            margin-left: -1px;
-        }
-
-        .timeline-item {
-            padding: 10px 40px;
-            position: relative;
-            width: 50%;
-            box-sizing: border-box;
-        }
-
-        .timeline-item:nth-child(odd) {
-            left: 0;
-        }
-
-        .timeline-item:nth-child(even) {
-            left: 50%;
-        }
-
-        .timeline-content {
-            padding: 20px;
-            background: var(--card-bg);
-            border-radius: 8px;
-            position: relative;
-            animation: fadeInUp 0.5s ease-out;
-        }
-
-        .timeline-content::after {
-            content: '';
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            background: var(--accent-color);
-            border-radius: 50%;
-            top: 50%;
-            transform: translateY(-50%);
-        }
-
-        .timeline-item:nth-child(odd) .timeline-content::after {
-            right: -60px;
-        }
-
-        .timeline-item:nth-child(even) .timeline-content::after {
-            left: -60px;
-        }
-
-        .timeline-content {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.8s ease-out;
-        }
-
-        .timeline-content.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .skill-progress {
-            width: 100%;
-            height: 4px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 2px;
-            margin-top: 8px;
-            overflow: hidden;
-        }
-
-        .skill-progress-bar {
-            height: 100%;
-            background: var(--accent-color);
-            border-radius: 2px;
-            transition: width 1s ease-out;
-        }
-
-        .hero-title, .hero-title *, .hero-subtitle, .hero-subtitle *, .text-white, .text-white * {
-            color: #fff !important;
-            opacity: 1 !important;
-            transition: none !important;
-        }
-        .card {
-            opacity: 1 !important;
-        }
-        #home .text-gray-300, #home .text-gray-300 * {
-            color: #fff !important;
-            opacity: 1 !important;
-        }
-       
-        .btn-primary, .btn-outline {
-            transition: all 0.3s cubic-bezier(0.4,0,0.2,1), box-shadow 0.3s cubic-bezier(0.4,0,0.2,1);
-        }
-        .btn-primary:hover, .btn-outline:hover {
-            transform: translateY(-2px) scale(1.04);
-            box-shadow: 0 8px 24px rgba(122,162,247,0.18);
-        }
-        .btn-primary:active, .btn-outline:active {
-            transform: scale(0.97);
-        }
-        .card, .skill-item {
-            transition: box-shadow 0.3s cubic-bezier(0.4,0,0.2,1), transform 0.3s cubic-bezier(0.4,0,0.2,1);
-        }
-        .card:hover, .skill-item:hover {
-            box-shadow: 0 16px 40px rgba(122,162,247,0.18);
-            transform: scale(1.15);
-        }
-        .navbar-blur.shadow-lg {
-            box-shadow: 0 4px 24px rgba(0,0,0,0.18);
-        }
-        @media (max-width: 768px) {
-            .about-section {
-                flex-direction: column !important;
-                gap: 1.5rem;
-            }
-            .about-title-text, .about-skills, .vs-code-profile {
-                width: 100% !important;
-                max-width: 100% !important;
-                box-sizing: border-box;
-                padding-left: 0.75rem;
-                padding-right: 0.75rem;
-            }
-            .timeline {
-                max-width: 100vw;
-                margin: 0 auto;
-                padding: 0;
-            }
-            .timeline-item {
-                display: block;
-                width: 100vw !important;
-                left: 0 !important;
-                padding: 0 0 2.5rem 0 !important;
-                margin: 0 auto;
-                background: transparent;
-            }
-            .timeline-side {
-                display: none;
-            }
-            .timeline-content {
-                background: var(--card-bg);
-                border-radius: 8px;
-                padding: 1.25rem;
-                width: 90vw;
-                max-width: 90vw;
-                box-sizing: border-box;
-                text-align: center;
-                position: relative;
-                z-index: 1;
-                margin: 0 auto 1.5rem auto;
-            }
-            .timeline .timeline-vertical-line {
-                height: 20px !important;
-            }
-        }
-        /* Back to Top Button */
-        #backToTop {
-            position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            z-index: 50;
-            background: var(--accent-color);
-            color: #fff;
-            border: none;
-            border-radius: 50%;
-            width: 48px;
-            height: 48px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 16px rgba(0,0,0,0.18);
-            cursor: pointer;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.3s, transform 0.3s;
-        }
-        #backToTop.visible {
-            opacity: 1;
-            pointer-events: auto;
-            transform: scale(1);
+            --font-sans: 'Inter', ui-sans-serif, sans-serif, system-ui;
         }
     </style>
 </head>
-<body class="bg-gray-900">
-    <div class="bg-pattern"></div>
-    <div class="bg-noise"></div>
-    <div class="particles" id="particles"></div>
-
-    <nav class="fixed top-0 w-full z-50 navbar-blur">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center py-4">
-                <div class="text-2xl font-bold gradient-text">CJB</div>
-                <div class="hidden md:flex space-x-8">
-                    <a href="#home" class="nav-link text-gray-300 hover:text-white transition-colors">Home</a>
-                    <a href="#about" class="nav-link text-gray-300 hover:text-white transition-colors">About</a>
-                    <a href="#skills" class="nav-link text-gray-300 hover:text-white transition-colors">Skills</a>
-                    <a href="#projects" class="nav-link text-gray-300 hover:text-white transition-colors">Projects</a>
-                    <a href="#journey" class="nav-link text-gray-300 hover:text-white transition-colors">Journey</a>
-                    <a href="#contact" class="nav-link text-gray-300 hover:text-white transition-colors">Contact</a>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <div class="nav-row">
+                <div class="nav-brand">CJB</div>
+                <div class="nav-actions">
+                    <div class="hidden md:flex nav-links">
+                        <a href="#home" class="nav-link">Home</a>
+                        <a href="#about" class="nav-link">About</a>
+                        <a href="#projects" class="nav-link">Projects</a>
+                        <a href="#skills" class="nav-link">Tech Stack</a>
+                        <a href="#contact" class="nav-link">Contact</a>
                 </div>
-                <button class="md:hidden text-gray-300 hover:text-white transition-colors" id="mobile-menu-btn">
-                    <i class="fas fa-bars text-xl"></i>
+                    <button class="theme-switch" id="theme-toggle" type="button" aria-label="Toggle theme">
+                        <span class="theme-switch-thumb"></span>
+                    </button>
+                    <button class="btn-ghost md:hidden" id="mobile-menu-btn" aria-label="Open menu">
+                        <i class="fas fa-bars"></i>
                 </button>
             </div>
         </div>
-        <div class="md:hidden hidden bg-gray-900 border-t border-gray-800" id="mobile-menu">
-            <div class="px-4 py-2 space-y-2">
-                <a href="#home" class="block py-2 text-gray-300 hover:text-white transition-colors">Home</a>
-                <a href="#about" class="block py-2 text-gray-300 hover:text-white transition-colors">About</a>
-                <a href="#skills" class="block py-2 text-gray-300 hover:text-white transition-colors">Skills</a>
-                <a href="#projects" class="block py-2 text-gray-300 hover:text-white transition-colors">Projects</a>
-                <a href="#journey" class="block py-2 text-gray-300 hover:text-white transition-colors">Journey</a>
-                <a href="#contact" class="block py-2 text-gray-300 hover:text-white transition-colors">Contact</a>
             </div>
+        <div class="mobile-menu" id="mobile-menu">
+            <a href="#home" class="nav-link">Home</a>
+            <a href="#about" class="nav-link">About</a>
+            <a href="#projects" class="nav-link">Projects</a>
+            <a href="#skills" class="nav-link">Tech Stack</a>
+            <a href="#contact" class="nav-link">Contact</a>
         </div>
     </nav>
 
-    <div class="scroll-progress"></div>
+    <div class="scroll-progress" id="scroll-progress"></div>
 
-   <section id="home" class="min-h-screen flex items-center gradient-bg text-white">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <div class="hero-content">
-            <div class="mx-auto mb-6 w-36 h-36 rounded-full bg-gray-800 flex items-center justify-center border-4 border-blue-400 shadow-lg overflow-hidden" id="profile-img-container" style="opacity:0;">
-              <img src="profile.jpg" alt="Cydric James Bulan profile photo" class="w-full h-full object-cover" id="profile-img" />
-            </div>
-            <h1 class="hero-title text-5xl md:text-6xl font-bold mb-4" id="hero-title">
-                Hi, I'm <span class="typing-effect">Cydric James Bulan</span>
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container hero-grid">
+            <div class="hero-content animate-fade-in-up">
+                <p class="eyebrow">Developer</p>
+                <h1 class="hero-title">
+                    Hi, I'm <span class="hero-name">Cydric James Bulan</span>
             </h1>
-            <p class="hero-subtitle text-xl md:text-2xl mb-8">
-                Aspiring Frontend Developer & UI Enthusiast
-            </p>
-            <p class="text-lg mb-8 max-w-2xl mx-auto">
-                A passionate student at STI Balagtas, crafting modern web experiences with a focus on clean design and user interaction
-            </p>
-            <div class="flex flex-row flex-wrap justify-center gap-4">
-                <a href="#projects" class="btn-primary px-8 py-3 rounded-full font-semibold inline-block transition-transform duration-300 ease-in-out transform hover:scale-105">View My Work</a>
-                <a href="#contact" class="btn-outline text-white px-8 py-3 rounded-full font-semibold inline-block border border-white hover:bg-white hover:text-black transition transition-transform duration-300 ease-in-out transform hover:scale-105">Let's Connect</a>
+                <p class="hero-subtitle">Aspiring Game & Web Developer</p>
+                <p class="hero-description">
+                    Passionate student at STI Balagtas with experience in web and game development. I create clean, user-friendly designs, engaging interactions, and player-first experiences, and I’m always eager to learn new tech and contribute to meaningful projects.
+                </p>
+                <div class="hero-actions">
+                    <a href="#projects" class="btn btn-primary">View My Work</a>
+                    <a href="mailto:cedricjamesbulan@gmail.com" class="btn btn-outline">Let's Connect</a>
             </div>
+        </div>
+            <div class="hero-visual">
+                <div id="lottie-hero" class="lottie-placeholder" aria-label="Loading animation"></div>
         </div>
     </div>
 </section>
 
-    <div class="section-divider"></div>
-
-    <section id="about" class="py-20 bg-gray-900">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="about-section flex flex-col md:flex-row items-center md:items-start gap-8">
-                <div class="about-content w-full md:w-1/2 mb-8 md:mb-0">
-                    <h2 class="text-4xl font-bold mb-6 gradient-text">About Me</h2>
-                    <p class="text-gray-300 mb-6 leading-relaxed">
-                        I'm an undergraduate student at STI Balagtas, passionate about creating beautiful and functional web interfaces. 
-                        While I'm still early in my development journey, I'm deeply committed to learning and growing as a frontend developer.
+    <!-- About Section -->
+    <section id="about" class="section">
+        <div class="container">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start;" class="about-grid">
+                <div class="about-left">
+                    <h2 class="section-title">About Me</h2>
+                    <p style="color: var(--muted-foreground); margin-bottom: 1rem; line-height: 1.7;">
+                        I am an adventurous and curious student at STI Balagtas working toward a bachelor’s degree, fascinated by technology, new roles, and “impossible” problems. I thrive in changing environments where I can take risks, learn fast, and adapt my skills to whatever’s needed.
                     </p>
-                    <p class="text-gray-300 mb-6 leading-relaxed">
-                        My focus is on mastering modern web technologies and design principles. I love experimenting with new UI patterns 
-                        and creating responsive, user-friendly interfaces. I'm always eager to collaborate on projects and learn from others 
-                        in the development community.
+                    <p style="color: var(--muted-foreground); margin-bottom: 1rem; line-height: 1.7;">
+                        I’ve held leadership roles in student organizations—leading teams, managing projects, and leveraging teammates’ strengths to deliver meaningful results. I also freelance on web and game projects, covering everything from UI/UX and visual design to gameplay mechanics and user flow, aiming for smooth, delightful experiences across devices.
                     </p>
-                    <div class="flex flex-wrap gap-4">
-                        <span class="bg-gray-800 text-blue-400 px-3 py-1 rounded-full text-sm">HTML/CSS</span>
-                        <span class="bg-gray-800 text-blue-400 px-3 py-1 rounded-full text-sm">JavaScript</span>
-                        <span class="bg-gray-800 text-blue-400 px-3 py-1 rounded-full text-sm">React</span>
-                        <span class="bg-gray-800 text-blue-400 px-3 py-1 rounded-full text-sm">Tailwind CSS</span>
+                    <p style="color: var(--muted-foreground); margin-bottom: 1.5rem; line-height: 1.7;">
+                        I’m a fast learner through experimentation, design iteration, and feedback. Teamwork fuels me: I love brainstorming, pushing ideas forward, and shipping products that are technically solid, user-friendly, and impactful. I see myself as an adaptable, inquisitive, and determined developer—driven by the intersection of technology and design to bring ideas to life.
+                    </p>
+                    <div class="badge-group">
+                        <span class="badge badge-secondary">Web Dev</span>
+                        <span class="badge">Game Dev</span>
+                        <span class="badge">Team Lead</span>
+                        <span class="badge">Freelancer</span>
                     </div>
                 </div>
-                <div class="vs-code-profile w-full md:w-1/2">
+                <div class="vs-code-profile about-right">
                     <div class="vs-container">
                         <div class="vs-header">
                             <div class="vs-dot red"></div>
                             <div class="vs-dot yellow"></div>
                             <div class="vs-dot green"></div>
-                            <span class="text-gray-400 text-sm ml-2">index.html</span>
+                            <span style="margin-left: 0.5rem; font-size: 0.75rem; color: var(--muted-foreground);">index.html</span>
                         </div>
                         <div class="vs-content">
                             <div class="vs-line">
                                 <span class="vs-line-number">1</span>
-                                <span class="vs-keyword">&lt;!DOCTYPE html&gt;</span></div>
+                                <span class="vs-keyword">&lt;!DOCTYPE html&gt;</span>
+                            </div>
                             <div class="vs-line">
                                 <span class="vs-line-number">2</span>
-                                <span class="vs-keyword">&lt;html</span> <span class="vs-string">lang="en"</span><span class="vs-keyword">&gt;</span></div>
+                                <span class="vs-keyword">&lt;html</span> <span class="vs-string">lang="en"</span><span class="vs-keyword">&gt;</span>
+                            </div>
                             <div class="vs-line">
                                 <span class="vs-line-number">3</span>
-                                <span class="vs-keyword">&lt;head&gt;</span></div>
+                                <span class="vs-keyword">&lt;head&gt;</span>
+                            </div>
                             <div class="vs-line">
                                 <span class="vs-line-number">4</span>
-                                <span class="vs-keyword">&lt;title&gt;</span>My Portfolio<span class="vs-keyword">&lt;/title&gt;</span></div>
+                                <span class="vs-keyword">&lt;title&gt;</span>My Portfolio<span class="vs-keyword">&lt;/title&gt;</span>
+                            </div>
                             <div class="vs-line">
                                 <span class="vs-line-number">5</span>
-                                <span class="vs-keyword">&lt;/head&gt;</span></div>
+                                <span class="vs-keyword">&lt;/head&gt;</span>
+                            </div>
                             <div class="vs-line">
                                 <span class="vs-line-number">6</span>
-                                <span class="vs-keyword">&lt;body&gt;</span></div>
+                                <span class="vs-keyword">&lt;body&gt;</span>
+                            </div>
                             <div class="vs-line">
                                 <span class="vs-line-number">7</span>
-                                <span class="vs-comment">&lt;!-- Building something amazing --&gt;</span></div>
+                                <span class="vs-comment">&lt;!-- Building something amazing --&gt;</span>
+                            </div>
                             <div class="vs-line">
                                 <span class="vs-line-number">8</span>
-                                <span class="vs-keyword">&lt;/body&gt;</span></div>
+                                <span class="vs-keyword">&lt;/body&gt;</span>
+                            </div>
                             <div class="vs-line">
                                 <span class="vs-line-number">9</span>
-                                <span class="vs-keyword">&lt;/html&gt;</span></div>
+                                <span class="vs-keyword">&lt;/html&gt;</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -768,331 +147,216 @@
         </div>
     </section>
 
-    <section id="skills" class="py-20 bg-gray-900">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl md:text-4xl font-bold mb-4 gradient-text">Skills & Tools</h2>
-                <p class="text-gray-300 max-w-2xl mx-auto text-base md:text-lg">
-                    Development stacks and technologies I'm studying and utilizing.
+    <!-- Projects Section -->
+    <section id="projects" class="section projects-section">
+        <div class="container">
+            <div class="text-center mb-8">
+                <h2 class="section-title">Projects</h2>
+                <p class="section-description">Highlighted work with brief details and live/code links.</p>
+                </div>
+            <div class="projects-layout">
+                <div class="carousel">
+                    <div class="carousel-track">
+                        <article class="card project-slide active" data-index="0" data-title="Case No. Zero: A Crime Case Narrative Set in the Philippine Legal System" data-desc="The capstone project was inspired by the legal system of the Philippines. My role in the project was that of team leader and lead programmer responsible for all game mechanics as well as documentation.<br><br>In the game, players investigate suspects, collect proof, and confront the prosecutor in court to reveal a larger conspiracy." data-tech="GDScript" data-link="https://github.com/cedcedie/capstone-game-case-no-zero">
+                            <img src="images/case_no_zero.png" alt="Case No Zero" class="project-image">
+                        </article>
+                        <article class="card project-slide" data-index="1" data-title="STI Library Attendance And Circulation Monitoring" data-desc="This is a project that is aimed at modernizing library operations over the web and mobile devices.<br><br>As a team leader of four, I created the web system that included a landing page, user dashboard, admin dashboard, authentication, and overall database flow. I also supervised the team while they built the mobile application.<br><br>The system allows librarians to track attendance, manage the circulation of books, and generate reports. Students, on the other hand, can view their own attendance and borrowing history on a clean interface." data-tech="HTML/CSS, JavaScript, PHP, PostgreSQL" data-link="https://github.com/cedcedie/Library-Attendance-And-Circulation-Monitoring">
+                            <img src="library_system.png" alt="Library Attendance And Circulation Monitoring" class="project-image">
+                        </article>
+                        <article class="card project-slide" data-index="2" data-title="Aqua Pest Control System" data-desc="A web application that streamlines Aqua Pest Control's operations.<br><br>As team leader, I guided four members and owned the frontend—the first time I built a full web interface. I delivered the landing page, user dashboard, and admin dashboard to keep the experience clean and efficient.<br><br>The system lets staff manage service schedules, monitor client requests, and log pest-control activities, while clients can track service updates and history through the portal." data-tech="ASP.NET, CSHTML, MySQL" data-link="https://github.com/cedcedie/AquaPestControlSystem">
+                            <img src="pest.png" alt="Aqua Pest Control System" class="project-image">
+                        </article>
+                        <article class="card project-slide" data-index="3" data-title="Max Learning Academy" data-desc="A Figma design project developed to handle academic records and activities for pupils from grade 1 to 10. I crafted the UI/UX with emphasis on friendly navigation, clear information hierarchy, and appealing layouts for both students and administrators.<br><br>The design showcases my ability to create educational platforms that are both practical and easy to use." data-tech="Figma, UI/UX" data-link="https://www.figma.com/design/UBC2goAjQ5lkiP8jJNlb5O/Max-Learning-Academy?node-id=0-1&t=Y9SJD1feUPwfiCOg-1" data-linklabel="View in Figma" data-linkicon="fab fa-figma">
+                            <img src="figma.png" alt="Max Learning Academy Design" class="project-image skeleton">
+                        </article>
+            </div>
+                    </div>
+                <div class="project-detail card">
+                    <h3 class="project-detail-title">Case no zero : a crime case narrative set on the philliphine legal system</h3>
+                    <p class="project-detail-desc">Capstone project inspired by the Philippine legal system. I served as team leader and lead developer, handling all game logic and documentation.<br><br>Players investigate suspects, gather evidence, and challenge the fiscal in court to expose a larger conspiracy.</p>
+                    <div class="project-detail-tags"></div>
+                    <div class="project-detail-actions">
+                        <a href="https://github.com/cedcedie/capstone-game-case-no-zero" class="btn btn-primary project-detail-link" data-confirm="Are you sure you want to redirect to this project?"><i class="fab fa-github"></i>&nbsp;View on GitHub</a>
+                </div>
+                    </div>
+                </div>
+            <div class="carousel-controls">
+                <button class="btn btn-outline carousel-prev" aria-label="Previous project"><i class="fas fa-chevron-left"></i></button>
+                <div class="carousel-dots"></div>
+                <button class="btn btn-outline carousel-next" aria-label="Next project"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tech Stack Section -->
+    <section id="skills" class="section">
+        <div class="container">
+            <div class="text-center mb-8">
+                <h2 class="section-title">Tech Stack</h2>
+                <p class="section-description">Tools and technologies I use. Icons outside core stack are still key for delivery.</p>
+            </div>
+            <div class="tech-stack">
+                <div class="tech-category">
+                    <h3>Front-End</h3>
+                    <div class="tech-grid">
+                        <div class="tech-item"><i class="fab fa-html5"></i><span>HTML</span></div>
+                        <div class="tech-item"><i class="fab fa-css3-alt"></i><span>CSS</span></div>
+                        <div class="tech-item"><i class="fab fa-js-square"></i><span>JavaScript</span></div>
+                        <div class="tech-item"><i class="fab fa-react"></i><span>React</span></div>
+                        <div class="tech-item">
+                            <span class="icon-tailwind" aria-hidden="true">
+                                <svg viewBox="0 0 48 48" role="img">
+                                    <path d="M24.002 9.5c-6.002 0-9.754 2.998-11.257 8.994 2.251-2.998 4.876-4.123 7.875-3.377 1.711.427 2.935 1.663 4.289 3.034 2.208 2.24 4.768 4.842 10.35 4.842 6.002 0 9.754-2.998 11.257-8.994-2.251 2.998-4.876 4.123-7.875 3.377-1.711-.427-2.935-1.663-4.289-3.034-2.208-2.24-4.768-4.842-10.35-4.842Zm-11.257 12.493c-6.002 0-9.754 2.998-11.257 8.994 2.251-2.998 4.876-4.123 7.875-3.377 1.711.427 2.935 1.663 4.289 3.034 2.208 2.24 4.768 4.842 10.35 4.842 6.002 0 9.754-2.998 11.257-8.994-2.251 2.998-4.876 4.123-7.875 3.377-1.711-.427-2.935-1.663-4.289-3.034-2.208-2.24-4.768-4.842-10.35-4.842Z" fill="currentColor"/>
+                                </svg>
+                            </span>
+                            <span>Tailwind</span>
+                        </div>
+                        <div class="tech-item"><i class="fas fa-code"></i><span>CSHTML</span></div>
+                        </div>
+                    </div>
+                <div class="tech-category">
+                    <h3>Back-End</h3>
+                    <div class="tech-grid">
+                        <div class="tech-item"><i class="fab fa-php"></i><span>PHP</span></div>
+                        <div class="tech-item"><i class="fab fa-python"></i><span>Python</span></div>
+                        <div class="tech-item">
+                            <span class="tech-icon" aria-hidden="true">
+                                <svg viewBox="0 0 128 128" role="img">
+                                    <path fill="currentColor" d="M64 4 5 36v56l59 32 59-32V36z"/>
+                                    <path fill="currentColor" d="M76.8 83.8c-3.5 3-8.1 4.5-13.7 4.5-3.1 0-6-.5-8.5-1.6-2.6-1-4.8-2.6-6.6-4.6-1.8-2-3.2-4.5-4.1-7.4-.9-2.9-1.4-6.2-1.4-9.8 0-3.7.5-7 1.6-10 1.1-3 2.6-5.6 4.6-7.7 1.9-2.2 4.3-3.8 7-5 2.7-1.2 5.8-1.8 9.2-1.8 2.9 0 5.4.4 7.5 1.2 2.1.8 3.9 1.8 5.3 3.2 1.5 1.3 2.6 2.8 3.5 4.3.8 1.6 1.4 3.1 1.7 4.6h-9c-.4-1.6-1.2-3-2.5-4.1-1.3-1.2-3.1-1.8-5.5-1.8-1.8 0-3.4.3-4.8 1-1.4.7-2.6 1.7-3.6 3-1 1.3-1.7 2.9-2.2 4.8-.5 1.9-.8 4-.8 6.4 0 2.3.2 4.4.7 6.3.5 1.9 1.2 3.5 2.2 4.9 1 1.3 2.2 2.4 3.7 3.1 1.5.7 3.2 1.1 5.2 1.1 2.6 0 4.6-.6 6.1-1.8 1.5-1.2 2.4-2.8 2.8-4.9h9c-.3 2-1 3.9-1.9 5.7-.9 1.8-2.2 3.3-3.8 4.6z"/>
+                                    <path fill="currentColor" d="M95.7 72.6 88 68.4v-8.9l7.7-4.2 7.7 4.2v8.9z"/>
+                                </svg>
+                            </span>
+                            <span>C#</span>
+                </div>
+                        <div class="tech-item"><i class="fab fa-java"></i><span>Java</span></div>
+                        </div>
+                        </div>
+                <div class="tech-category">
+                    <h3>Database</h3>
+                    <div class="tech-grid">
+                        <div class="tech-item"><i class="fas fa-database"></i><span>MySQL</span></div>
+                        <div class="tech-item"><i class="fas fa-database"></i><span>PostgreSQL</span></div>
+                    </div>
+                </div>
+                <div class="tech-category">
+                    <h3>Tools</h3>
+                    <div class="tech-grid">
+                        <div class="tech-item"><i class="fab fa-git-alt"></i><span>Git</span></div>
+                        <div class="tech-item"><i class="fas fa-server"></i><span>XAMPP</span></div>
+                        <div class="tech-item"><i class="fab fa-figma"></i><span>Figma</span></div>
+                        <div class="tech-item"><i class="fab fa-java"></i><span>Gradle</span></div>
+                        </div>
+                        </div>
+                <div class="tech-category">
+                    <h3>Game Development</h3>
+                    <div class="tech-grid">
+                        <div class="tech-item">
+                            <span class="tech-icon" aria-hidden="true">
+                                <svg viewBox="0 0 128 128" role="img">
+                                    <path fill="currentColor" d="M64 4 5 36v56l59 32 59-32V36z"/>
+                                </svg>
+                            </span>
+                            <span>C++</span>
+                    </div>
+                        <div class="tech-item">
+                            <span class="tech-icon" aria-hidden="true">
+                                <svg viewBox="0 0 128 128" role="img">
+                                    <path fill="currentColor" d="M64 4 5 36v56l59 32 59-32V36z"/>
+                                    <path fill="currentColor" d="M76.8 83.8c-3.5 3-8.1 4.5-13.7 4.5-3.1 0-6-.5-8.5-1.6-2.6-1-4.8-2.6-6.6-4.6-1.8-2-3.2-4.5-4.1-7.4-.9-2.9-1.4-6.2-1.4-9.8 0-3.7.5-7 1.6-10 1.1-3 2.6-5.6 4.6-7.7 1.9-2.2 4.3-3.8 7-5 2.7-1.2 5.8-1.8 9.2-1.8 2.9 0 5.4.4 7.5 1.2 2.1.8 3.9 1.8 5.3 3.2 1.5 1.3 2.6 2.8 3.5 4.3.8 1.6 1.4 3.1 1.7 4.6h-9c-.4-1.6-1.2-3-2.5-4.1-1.3-1.2-3.1-1.8-5.5-1.8-1.8 0-3.4.3-4.8 1-1.4.7-2.6 1.7-3.6 3-1 1.3-1.7 2.9-2.2 4.8-.5 1.9-.8 4-.8 6.4 0 2.3.2 4.4.7 6.3.5 1.9 1.2 3.5 2.2 4.9 1 1.3 2.2 2.4 3.7 3.1 1.5.7 3.2 1.1 5.2 1.1 2.6 0 4.6-.6 6.1-1.8 1.5-1.2 2.4-2.8 2.8-4.9h9c-.3 2-1 3.9-1.9 5.7-.9 1.8-2.2 3.3-3.8 4.6z"/>
+                                    <path fill="currentColor" d="M95.7 72.6 88 68.4v-8.9l7.7-4.2 7.7 4.2v8.9z"/>
+                                </svg>
+                            </span>
+                            <span>C#</span>
+                </div>
+                        <div class="tech-item">
+                            <span class="tech-icon" aria-hidden="true">
+                                <svg viewBox="0 0 128 128" role="img">
+                                    <path fill="currentColor" d="M64 4 5 36v56l59 32 59-32V36z"/>
+                                    <path fill="currentColor" d="M46 62h36l-4 26-14 4-14-4z"/>
+                                    <path fill="currentColor" d="M64 66v22l10-3 3-19z"/>
+                                    <path fill="currentColor" d="M58 58h12v4H58z"/>
+                                    <path fill="currentColor" d="M52 50h24v6H52z"/>
+                                </svg>
+                            </span>
+                            <span>GDScript</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Alert Dialogs -->
+    <div id="confirm-dialog" class="alert-backdrop">
+        <div class="alert-dialog">
+            <h3 style="font-size:1.1rem; font-weight:600; margin-bottom:0.5rem;">Redirect</h3>
+            <p id="confirm-message" style="color: var(--muted-foreground);">Are you sure?</p>
+            <div class="alert-actions">
+                <button class="btn btn-outline" id="confirm-no">Cancel</button>
+                <button class="btn btn-primary" id="confirm-yes">Continue</button>
+                        </div>
+                        </div>
+                    </div>
+
+    <div id="success-dialog" class="alert-backdrop">
+        <div class="alert-dialog">
+            <h3 style="font-size:1.1rem; font-weight:600; margin-bottom:0.5rem;">Success</h3>
+            <p id="success-message" style="color: var(--muted-foreground);">Message sent.</p>
+            <div class="alert-actions">
+                <button class="btn btn-primary" id="success-close">Close</button>
+                        </div>
+                        </div>
+                    </div>
+
+    <div id="error-dialog" class="alert-backdrop">
+        <div class="alert-dialog alert-dialog-error">
+            <h3 style="font-size:1.1rem; font-weight:600; margin-bottom:0.5rem; color: var(--destructive);">Error</h3>
+            <p id="error-message" style="color: var(--muted-foreground);">An error occurred.</p>
+            <div class="alert-actions">
+                <button class="btn btn-primary" id="error-close">Close</button>
+                        </div>
+                        </div>
+                    </div>
+
+
+    <!-- Contact Section -->
+    <section id="contact" class="section">
+        <div class="container">
+            <div class="text-center mb-8">
+                <h2 class="section-title">Let's Connect</h2>
+                <p class="section-description">
+                    I'm always open to new opportunities, collaborations, and learning experiences. Feel free to reach out!
                 </p>
-                <div class="mt-6 flex justify-center">
-                    <label for="skills-sort" class="sr-only">Sort skills</label>
-                    <select id="skills-sort" class="bg-gray-800 text-white px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 w-full max-w-xs">
-                        <option value="name">Sort by Name (A-Z)</option>
-                        <option value="level">Sort by Skill Level (High to Low)</option>
-                    </select>
-                </div>
             </div>
-            <div id="skills-grid" class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 md:gap-6">
-                <div class="skill-item p-6 rounded-lg text-center" data-skill="Java" data-level="61">
-                    <i class="fab fa-java text-4xl text-[#FFA07A] mb-3"></i>
-                    <p class="font-semibold text-gray-300">Java</p>
-                    <div class="skill-progress">
-                        <div class="skill-progress-bar" style="width:0%" data-width="58"></div>
-                    </div>
-                </div>
-                <div class="skill-item p-6 rounded-lg text-center" data-skill="C#" data-level="74">
-                    <i class="fas fa-hashtag text-4xl text-[#178600] mb-3"></i>
-                    <p class="font-semibold text-gray-300">C#</p>
-                    <div class="skill-progress">
-                        <div class="skill-progress-bar" style="width:0%" data-width="71"></div>
-                    </div>
-                </div>
-                <div class="skill-item p-6 rounded-lg text-center" data-skill="PostgreSQL" data-level="75">
-                    <i class="fas fa-database text-4xl text-[#87CEEB] mb-3"></i>
-                    <p class="font-semibold text-gray-300">PostgreSQL</p>
-                    <div class="skill-progress">
-                        <div class="skill-progress-bar" style="width:0%" data-width="72"></div>
-                    </div>
-                </div>
-                <div class="skill-item p-6 rounded-lg text-center">
-                    <i class="fab fa-laravel text-4xl text-[#DC143C] mb-3"></i>
-                    <p class="font-semibold text-gray-300">Laravel</p>
-                    <div class="skill-progress">
-                        <div class="skill-progress-bar" style="width:0%" data-width="52"></div>
-                    </div>
-                </div>
-                <div class="skill-item p-6 rounded-lg text-center">
-                    <i class="fab fa-php text-4xl text-[#9370DB] mb-3"></i>
-                    <p class="font-semibold text-gray-300">PHP</p>
-                    <div class="skill-progress">
-                        <div class="skill-progress-bar" style="width:0%" data-width="70"></div>
-                    </div>
-                </div>
-                <div class="skill-item p-6 rounded-lg text-center">
-                    <i class="fab fa-android text-4xl text-[#3CB371] mb-3"></i>
-                    <p class="font-semibold text-gray-300">Java Mobile</p>
-                    <div class="skill-progress">
-                        <div class="skill-progress-bar" style="width:0%" data-width="62"></div>
-                    </div>
-                </div>
-                <div class="skill-item p-6 rounded-lg text-center">
-                    <i class="fas fa-code text-4xl text-[#FF8C00] mb-3"></i>
-                    <p class="font-semibold text-gray-300">XML</p>
-                    <div class="skill-progress">
-                        <div class="skill-progress-bar" style="width:0%" data-width="65"></div>
-                    </div>
-                </div>
-                <div class="skill-item p-6 rounded-lg text-center">
-                    <i class="fab fa-windows text-4xl text-[#00BFFF] mb-3"></i>
-                    <p class="font-semibold text-gray-300">WinForms</p>
-                    <div class="skill-progress">
-                        <div class="skill-progress-bar" style="width:0%" data-width="80"></div>
-                    </div>
-                </div>
-                <div class="skill-item p-6 rounded-lg text-center">
-                    <i class="fab fa-microsoft text-4xl text-[#512BD4] mb-3"></i>
-                    <p class="font-semibold text-gray-300">CSHTML</p>
-                    <div class="skill-progress">
-                        <div class="skill-progress-bar" style="width:0%" data-width="79"></div>
-                    </div>
-                </div>
-                <div class="skill-item p-6 rounded-lg text-center">
-                    <i class="fab fa-html5 text-4xl text-[#E44D26] mb-3"></i>
-                    <p class="font-semibold text-gray-300">HTML5</p>
-                    <div class="skill-progress">
-                        <div class="skill-progress-bar" style="width:0%" data-width="87"></div>
-                    </div>
-                </div>
-                <div class="skill-item p-6 rounded-lg text-center">
-                    <i class="fab fa-css3-alt text-4xl text-[#264DE4] mb-3"></i>
-                    <p class="font-semibold text-gray-300">CSS3</p>
-                    <div class="skill-progress">
-                        <div class="skill-progress-bar" style="width:0%" data-width="78"></div>
-                    </div>
-                </div>
-                <div class="skill-item p-6 rounded-lg text-center">
-                    <i class="fab fa-js-square text-4xl text-[#F0DB4F] mb-3"></i>
-                    <p class="font-semibold text-gray-300">JavaScript</p>
-                    <div class="skill-progress">
-                        <div class="skill-progress-bar" style="width:0%" data-width="73"></div>
-                    </div>
-                </div>
-                <div class="skill-item p-6 rounded-lg text-center">
-                    <i class="fab fa-figma text-4xl text-[#F24E1E] mb-3"></i>
-                    <p class="font-semibold text-gray-300">Figma</p>
-                    <div class="skill-progress">
-                        <div class="skill-progress-bar" style="width:0%" data-width="80"></div>
-                    </div>
-                </div>
-                <div class="skill-item p-6 rounded-lg text-center">
-                    <i class="fab fa-react text-4xl text-[#61DAFB] mb-3"></i>
-                    <p class="font-semibold text-gray-300">React</p>
-                    <div class="skill-progress">
-                        <div class="skill-progress-bar" style="width:0%" data-width="77"></div>
-                    </div>
-                </div>
-                <div class="skill-item p-6 rounded-lg text-center">
-                    <i class="fab fa-git-alt text-4xl text-[#F1502F] mb-3"></i>
-                    <p class="font-semibold text-gray-300">Git</p>
-                    <div class="skill-progress">
-                        <div class="skill-progress-bar" style="width:0%" data-width="85"></div>
-                    </div>
-                </div>
-                <div class="skill-item p-6 rounded-lg text-center">
-                    <i class="fas fa-server text-4xl text-[#F57C00] mb-3"></i>
-                    <p class="font-semibold text-gray-300">XAMPP</p>
-                    <div class="skill-progress">
-                        <div class="skill-progress-bar" style="width:0%" data-width="75"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="projects" class="py-20 bg-gray-900">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl md:text-4xl font-bold mb-4 gradient-text">Projects</h2>
-                <p class="text-gray-300 max-w-2xl mx-auto text-base md:text-lg">
-                    A showcase of my development journey and achievements
-                </p>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-                <div class="card rounded-lg overflow-hidden flex flex-col min-h-[420px]">
-                    <img src="library_system.png" alt="Library Attendance System Screenshot" class="w-full h-48 object-cover bg-gradient-to-br from-blue-500 to-cyan-600" />
-                    <div class="p-6 flex flex-col flex-1">
-                        <h3 class="text-xl font-bold mb-3 text-white">Library Attendance System</h3>
-                        <p class="text-gray-300 mb-4 flex-1">A comprehensive library management system with attendance tracking and circulation monitoring.</p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="bg-gray-800 text-blue-400 px-2 py-1 rounded text-xs">HTML/CSS</span>
-                            <span class="bg-gray-800 text-blue-400 px-2 py-1 rounded text-xs">JavaScript</span>
-                            <span class="bg-gray-800 text-blue-400 px-2 py-1 rounded text-xs">PHP</span>
-                            <span class="bg-gray-800 text-blue-400 px-2 py-1 rounded text-xs">Java Mobile</span>
-                            <span class="bg-gray-800 text-blue-400 px-2 py-1 rounded text-xs">PostgreSQL</span>
-                        </div>
-                        <div class="flex space-x-4 mt-auto">
-                            <a href="https://github.com/cedcedie/Library-Attendance-And-Circulation-Monitoring" target="_blank" class="text-blue-400 hover:text-blue-300 transition-colors">
-                                <i class="fab fa-github"></i> View Code
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="card rounded-lg overflow-hidden flex flex-col min-h-[420px]">
-                    <img src="pest.png" alt="Aqua Pest Control System Screenshot" class="w-full h-48 object-cover bg-gradient-to-br from-blue-500 to-cyan-600" />
-                    <div class="p-6 flex flex-col flex-1">
-                        <h3 class="text-xl font-bold mb-3 text-white">Aqua Pest Control System</h3>
-                        <p class="text-gray-300 mb-4 flex-1">A website for aquatic pest control management, built with ASP.NET for robust backend functionality and modern web features.</p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="bg-gray-800 text-blue-400 px-2 py-1 rounded text-xs">ASP.NET</span>
-                            <span class="bg-gray-800 text-blue-400 px-2 py-1 rounded text-xs">CSHTML</span>
-                            <span class="bg-gray-800 text-blue-400 px-2 py-1 rounded text-xs">MySQL</span>
-                        </div>
-                        <div class="flex space-x-4 mt-auto">
-                            <a href="https://github.com/cedcedie/AquaPestControlSystem" target="_blank" class="text-blue-400 hover:text-blue-300 transition-colors">
-                                <i class="fab fa-github"></i> View Code
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="card rounded-lg overflow-hidden flex flex-col min-h-[420px]">
-                    <img src="arsenia.png" alt="Arsenia Apartment System Screenshot" class="w-full h-48 object-cover bg-gradient-to-br from-blue-500 to-cyan-600" />
-                    <div class="p-6 flex flex-col flex-1">
-                        <h3 class="text-xl font-bold mb-3 text-white">Arsenia Apartment System</h3>
-                        <p class="text-gray-300 mb-4 flex-1">A desktop application for apartment management, built with WinForms in C#. Features include tenant management, billing, maintenance tracking, and secure data handling for property administrators.</p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="bg-gray-800 text-blue-400 px-2 py-1 rounded text-xs">C#</span>
-                            <span class="bg-gray-800 text-blue-400 px-2 py-1 rounded text-xs">WinForms</span>
-                        </div>
-                        <div class="flex space-x-4 mt-auto">
-                            <a href="#" target="_blank" class="text-blue-400 hover:text-blue-300 transition-colors">
-                                <i class="fab fa-github"></i> View Code
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="card rounded-lg overflow-hidden flex flex-col min-h-[420px]">
-                    <img src="https://placehold.co/400x192/1a1b26/fff?text=Case+No+Zero" alt="Case No Zero Screenshot" class="w-full h-48 object-cover bg-gradient-to-br from-blue-500 to-cyan-600" />
-                    <div class="p-6 flex flex-col flex-1">
-                        <h3 class="text-xl font-bold mb-3 text-white">Case No Zero</h3>
-                        <p class="text-gray-300 mb-4 flex-1">A C# based game project.</p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="bg-gray-800 text-blue-400 px-2 py-1 rounded text-xs">C#</span>
-                        </div>
-                        <div class="flex space-x-4 mt-auto">
-                            <a href="https://github.com/cedcedie/caseNoZero" target="_blank" class="text-blue-400 hover:text-blue-300 transition-colors">
-                                <i class="fab fa-github"></i> View Code
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="card rounded-lg overflow-hidden flex flex-col min-h-[420px]">
-                    <img src="figma.png" alt="Max Learning Academy Design Screenshot" class="w-full h-48 object-cover bg-gradient-to-br from-blue-500 to-cyan-600" />
-                    <div class="p-6 flex flex-col flex-1">
-                        <h3 class="text-xl font-bold mb-3 text-white">Max Learning Academy Design</h3>
-                        <p class="text-gray-300 mb-4 flex-1">UI/UX design for an educational platform, focusing on user-centered design principles.</p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="bg-gray-800 text-blue-400 px-2 py-1 rounded text-xs">Figma</span>
-                            <span class="bg-gray-800 text-blue-400 px-2 py-1 rounded text-xs">UI/UX</span>
-                        </div>
-                        <div class="flex space-x-4 mt-auto">
-                            <a href="https://www.figma.com/design/UBC2goAjQ5lkiP8jJNlb5O/Max-Learning-Academy?node-id=0-1&t=Y9SJD1feUPwfiCOg-1" target="_blank" class="text-blue-400 hover:text-blue-300 transition-colors">
-                                <i class="fab fa-figma"></i> View Design
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="journey" class="timeline-section w-full max-w-full overflow-x-hidden">
-        <div class="max-w-6xl mx-auto px-0 sm:px-6 lg:px-8 w-full max-w-full">
-            <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center gradient-text">Learning Journey</h2>
-            <div class="timeline w-full max-w-full" style="min-height: 100px;">
-                <div class="flex flex-col gap-8 w-full max-w-full">
-                    <div class="timeline-item w-full">
-                        <div class="timeline-side">
-                            <div class="timeline-vertical-line"></div>
-                            <div class="timeline-point"></div>
-                        </div>
-                        <div class="timeline-content">
-                            <h3 class="text-lg md:text-xl font-bold mb-2">Java Fundamentals</h3>
-                            <p class="text-gray-300 text-base md:text-lg">Started with core Java programming concepts and OOP principles, building a strong foundation for software development.</p>
-                            <p class="text-sm text-gray-400 mt-2">2022</p>
-                        </div>
-                    </div>
-                    <div class="timeline-item w-full">
-                        <div class="timeline-side">
-                            <div class="timeline-vertical-line"></div>
-                            <div class="timeline-point"></div>
-                        </div>
-                        <div class="timeline-content">
-                            <h3 class="text-lg md:text-xl font-bold mb-2">C# WinForms</h3>
-                            <p class="text-gray-300 text-base md:text-lg">Explored desktop application development with C# and Windows Forms, gaining experience in GUI design and event handling.</p>
-                            <p class="text-sm text-gray-400 mt-2">2023</p>
-                        </div>
-                    </div>
-                    <div class="timeline-item w-full">
-                        <div class="timeline-side">
-                            <div class="timeline-vertical-line"></div>
-                            <div class="timeline-point"></div>
-                        </div>
-                        <div class="timeline-content">
-                            <h3 class="text-lg md:text-xl font-bold mb-2">Web Development Fundamentals</h3>
-                            <p class="text-gray-300 text-base md:text-lg">Initiated my web development journey with HTML, CSS, and JavaScript, focusing on creating responsive and interactive web pages.</p>
-                            <p class="text-sm text-gray-400 mt-2">2024</p>
-                        </div>
-                    </div>
-                    <div class="timeline-item w-full">
-                        <div class="timeline-side">
-                            <div class="timeline-vertical-line"></div>
-                            <div class="timeline-point"></div>
-                        </div>
-                        <div class="timeline-content">
-                            <h3 class="text-lg md:text-xl font-bold mb-2">Backend Development with PHP & Laravel</h3>
-                            <p class="text-gray-300 text-base md:text-lg">Dived into backend technologies, mastering PHP and the Laravel framework for robust web application development and database management.</p>
-                            <p class="text-sm text-gray-400 mt-2">2025</p>
-                        </div>
-                    </div>
-                    <div class="timeline-item last w-full">
-                        <div class="timeline-side">
-                            <!-- No vertical line or dot for the last item -->
-                        </div>
-                        <div class="timeline-content">
-                            <h3 class="text-lg md:text-xl font-bold mb-2">Mobile Development with Java</h3>
-                            <p class="text-gray-300 text-base md:text-lg">Currently exploring Java Mobile development for Android applications, aiming to build intuitive and engaging mobile experiences.</p>
-                            <p class="text-sm text-gray-400 mt-2">2025</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="contact" class="py-20 gradient-bg w-full max-w-full overflow-x-hidden">
-        <div class="max-w-6xl mx-auto px-0 sm:px-6 lg:px-8 text-center text-white w-full max-w-full">
-            <div>
-                <h2 class="text-4xl font-bold mb-4">Let's Connect</h2>
-                <p class="text-xl mb-8 opacity-90 max-w-2xl mx-auto">
-                    I'm always open to new opportunities, collaborations, and learning experiences. 
-                    Feel free to reach out!
-                </p>
-                <form id="contact-form" class="max-w-xl mx-auto mb-8 bg-gray-800 bg-opacity-80 p-8 rounded-lg shadow-lg flex flex-col gap-4" aria-label="Contact form" autocomplete="off" novalidate>
-                    <input type="text" name="name" placeholder="Your Name" class="px-4 py-3 rounded bg-gray-900 text-white focus:outline-none focus:ring-2 focus:ring-blue-400" aria-label="Your Name" required />
-                    <input type="email" name="email" placeholder="Your Email" class="px-4 py-3 rounded bg-gray-900 text-white focus:outline-none focus:ring-2 focus:ring-blue-400" aria-label="Your Email" required />
-                    <textarea name="message" placeholder="Your Message" rows="4" class="px-4 py-3 rounded bg-gray-900 text-white focus:outline-none focus:ring-2 focus:ring-blue-400" aria-label="Your Message" required></textarea>
-                    <button type="submit" class="btn-primary px-8 py-3 rounded-full font-semibold inline-block focus:outline-none focus:ring-2 focus:ring-blue-400 transition-transform transform active:scale-95" aria-label="Send Message">Send Message</button>
-                    <div id="form-success" class="hidden text-green-400 mt-2">Thank you! Your message has been sent.</div>
-                </form>
-              
-            </div>
-        </div>
-    </section>
-
-    <footer class="bg-gray-900 text-gray-400 py-8 border-t border-gray-800">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <div class="flex justify-center space-x-6 mb-4">
-                <a href="https://www.facebook.com/cedric.james.781367/" target="_blank" class="social-icon text-2xl opacity-80 hover:opacity-100" aria-label="Facebook">
-                    <i class="fab fa-facebook"></i>
-                </a>
-                <a href="https://www.instagram.com/notrikkuu/" target="_blank" class="social-icon text-2xl opacity-80 hover:opacity-100" aria-label="Instagram">
-                    <i class="fab fa-instagram"></i>
-                </a>
-                <a href="mailto:cedricjamesbulan@gmail.com" class="social-icon text-2xl opacity-80 hover:opacity-100" aria-label="Email">
+            <div class="contact-links" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 1.5rem; margin-top: 2rem;">
+                <a href="mailto:cedricjamesbulan@gmail.com" class="social-link" aria-label="Email">
                     <i class="fas fa-envelope"></i>
+                    <span>cedricjamesbulan@gmail.com</span>
+                </a>
+                <a href="tel:0961622551" class="social-link" aria-label="Phone">
+                    <i class="fas fa-phone"></i>
+                    <span>0961622551</span>
+                </a>
+                <a href="https://www.facebook.com/cedric.james.781367/" target="_blank" class="social-link" aria-label="Facebook">
+                    <i class="fab fa-facebook"></i>
+                    <span>Facebook</span>
+                </a>
+                <a href="https://www.instagram.com/notrikkuu/" target="_blank" class="social-link" aria-label="Instagram">
+                    <i class="fab fa-instagram"></i>
+                    <span>Instagram</span>
+                </a>
+                <a href="https://github.com/cedcedie" target="_blank" class="social-link" aria-label="GitHub">
+                    <i class="fab fa-github"></i>
+                    <span>GitHub</span>
                 </a>
             </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
             <p>&copy; 2025 Cydric James Bulan. All rights reserved.</p>
         </div>
     </footer>
@@ -1102,356 +366,19 @@
         <i class="fas fa-arrow-up"></i>
     </button>
 
-    <script>
-        document.querySelector('.hero-content').style.visibility = 'visible';
-        
-        gsap.registerPlugin(ScrollTrigger);
-
-        function createParticles() {
-            const particlesContainer = document.getElementById('particles');
-            const particleCount = 30;
-            
-            for (let i = 0; i < particleCount; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'particle';
-                particle.style.left = `${Math.random() * 100}%`;
-                particle.style.top = `${Math.random() * 100}%`;
-                particle.style.animationDelay = `${Math.random() * 20}s`;
-                particlesContainer.appendChild(particle);
+    <script src="script.js"></script>
+    <style>
+        @media (min-width: 768px) {
+            .hidden.md\:flex {
+                display: flex !important;
+            }
+            .md\:hidden {
+                display: none !important;
             }
         }
-
-        window.addEventListener('load', createParticles);
-
-        function initScrollAnimations() {
-            gsap.utils.toArray('section:not(#home)').forEach(section => {
-                gsap.from(section, {
-                    scrollTrigger: {
-                        trigger: section,
-                        start: "top 80%",
-                        end: "top 20%",
-                        toggleActions: "play none none none"
-                    },
-                    y: 50,
-                    opacity: 0,
-                    duration: 1,
-                    ease: "power3.out"
-                });
-            });
-
-            gsap.utils.toArray('.skill-item').forEach(item => {
-                gsap.from(item, {
-                    scrollTrigger: {
-                        trigger: item,
-                        start: "top 90%",
-                        toggleActions: "play none none none"
-                    },
-                    scale: 0.8,
-                    opacity: 0,
-                    duration: 0.6,
-                    ease: "back.out(1.7)"
-                });
-            });
-
-            gsap.utils.toArray('.card').forEach((card, i) => {
-                gsap.from(card, {
-                    scrollTrigger: {
-                        trigger: card,
-                        start: "top 85%",
-                        toggleActions: "play none none none"
-                    },
-                    y: 50,
-                    opacity: 0,
-                    duration: 0.8,
-                    delay: i * 0.2,
-                    ease: "power3.out"
-                });
-            });
+        .hidden {
+            display: none;
         }
-
-        const navbar = document.querySelector('nav');
-        let lastScrollPosition = window.pageYOffset;
-        let scrollTimeout;
-
-        function debounce(func, wait) {
-            let timeout;
-            return function executedFunction(...args) {
-                const later = () => {
-                    clearTimeout(timeout);
-                    func(...args);
-                };
-                clearTimeout(timeout);
-                timeout = setTimeout(later, wait);
-            };
-        }
-
-        const handleScroll = debounce(() => {
-            const currentScroll = window.pageYOffset;
-            
-            if (currentScroll > 50) {
-                navbar.classList.add('shadow-lg', 'bg-opacity-90');
-                navbar.style.backdropFilter = 'blur(10px)';
-            } else {
-                navbar.classList.remove('shadow-lg', 'bg-opacity-90');
-                navbar.style.backdropFilter = 'blur(5px)';
-            }
-
-            if (currentScroll > lastScrollPosition && currentScroll > 100) {
-                navbar.style.transform = 'translateY(-100%)';
-            } else {
-                navbar.style.transform = 'translateY(0)';
-            }
-
-            lastScrollPosition = currentScroll;
-        }, 10);
-
-        window.addEventListener('scroll', handleScroll);
-
-        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
-        let isMenuAnimating = false;
-
-        mobileMenuBtn.addEventListener('click', () => {
-            if (isMenuAnimating) return;
-            isMenuAnimating = true;
-
-            if (mobileMenu.classList.contains('hidden')) {
-                mobileMenu.classList.remove('hidden');
-                gsap.fromTo(mobileMenu,
-                    { height: 0, opacity: 0 },
-                    { 
-                        height: "auto",
-                        opacity: 1,
-                        duration: 0.3,
-                        ease: "power2.inOut",
-                        onComplete: () => isMenuAnimating = false
-                    }
-                );
-            } else {
-                gsap.to(mobileMenu, {
-                    height: 0,
-                    opacity: 0,
-                    duration: 0.3,
-                    ease: "power2.inOut",
-                    onComplete: () => {
-                        mobileMenu.classList.add('hidden');
-                        isMenuAnimating = false;
-                    }
-                });
-            }
-        });
-
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const targetId = this.getAttribute('href');
-                const targetSection = document.querySelector(targetId);
-                
-                if (targetSection) {
-                    if (!mobileMenu.classList.contains('hidden')) {
-                        mobileMenuBtn.click();
-                    }
-
-                    window.scrollTo({
-                        top: targetSection.offsetTop - 70,
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
-
-        const scrollProgress = document.querySelector('.scroll-progress');
-        const updateScrollProgress = debounce(() => {
-            const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            const scrolled = (window.scrollY / windowHeight) * 100;
-            scrollProgress.style.transform = `scaleX(${scrolled / 100})`;
-        }, 10);
-
-        window.addEventListener('scroll', updateScrollProgress);
-
-        const observerOptions = {
-            root: null,
-            rootMargin: '0px',
-            threshold: 0.1
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.timeline-content').forEach(content => {
-            observer.observe(content);
-        });
-
-        document.addEventListener('DOMContentLoaded', () => {
-            initScrollAnimations();
-        });
-
-        const sections = document.querySelectorAll('section');
-        const navLinks = document.querySelectorAll('.nav-link');
-
-        const updateActiveSection = debounce(() => {
-            let currentActive = '';
-            const scrollY = window.pageYOffset;
-            const windowHeight = window.innerHeight;
-            const documentHeight = document.documentElement.scrollHeight;
-
-            sections.forEach((section, index) => {
-                const sectionTop = section.offsetTop - 100;
-                const sectionHeight = section.clientHeight;
-                const sectionBottom = sectionTop + sectionHeight;
-
-                if (
-                    (scrollY >= sectionTop && scrollY < sectionBottom) ||
-                    (index === sections.length - 1 && (scrollY + windowHeight) >= documentHeight - 5)
-                ) {
-                    currentActive = section.getAttribute('id');
-                }
-            });
-
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href').includes(currentActive)) {
-                    link.classList.add('active');
-                }
-            });
-        }, 100);
-
-        window.addEventListener('scroll', updateActiveSection);
-        window.addEventListener('load', updateActiveSection);
-
-        document.addEventListener('DOMContentLoaded', function() {
-            document.querySelectorAll('.card').forEach(card => {
-                card.style.opacity = '1';
-            });
-        });
-
-        function animateSkillBars() {
-            const skillBars = document.querySelectorAll('.skill-progress-bar');
-            skillBars.forEach(bar => {
-                const width = bar.getAttribute('data-width');
-                bar.style.transition = 'width 1.2s cubic-bezier(0.4,0,0.2,1)';
-                bar.style.width = width + '%';
-            });
-        }
-        const skillsSection = document.getElementById('skills');
-        let skillsAnimated = false;
-        if (skillsSection) {
-            const skillsObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting && !skillsAnimated) {
-                        animateSkillBars();
-                        skillsAnimated = true;
-                        skillsObserver.disconnect();
-                    }
-                });
-            }, { threshold: 0.2 });
-            skillsObserver.observe(skillsSection);
-        }
-
-        const contactForm = document.getElementById('contact-form');
-        if (contactForm) {
-            contactForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                let valid = true;
-                const name = this.name.value.trim();
-                const email = this.email.value.trim();
-                const message = this.message.value.trim();
-                if (!name) {
-                    this.name.classList.add('ring-2', 'ring-red-400');
-                    valid = false;
-                } else {
-                    this.name.classList.remove('ring-2', 'ring-red-400');
-                }
-                if (!email || !/^\S+@\S+\.\S+$/.test(email)) {
-                    this.email.classList.add('ring-2', 'ring-red-400');
-                    valid = false;
-                } else {
-                    this.email.classList.remove('ring-2', 'ring-red-400');
-                }
-                if (!message) {
-                    this.message.classList.add('ring-2', 'ring-red-400');
-                    valid = false;
-                } else {
-                    this.message.classList.remove('ring-2', 'ring-red-400');
-                }
-                if (valid) {
-                    document.getElementById('form-success').classList.remove('hidden');
-                    this.reset();
-                } else {
-                    document.getElementById('form-success').classList.add('hidden');
-                }
-            });
-        }
-
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 10) {
-                navbar.classList.add('shadow-lg');
-            } else {
-                navbar.classList.remove('shadow-lg');
-            }
-        });
-
-        const skillsGrid = document.getElementById('skills-grid');
-        const sortSelect = document.getElementById('skills-sort');
-        function sortSkills() {
-            const skillItems = Array.from(skillsGrid.querySelectorAll('.skill-item'));
-            let sorted;
-            if (sortSelect.value === 'name') {
-                sorted = skillItems.sort((a, b) => {
-                    const nameA = a.querySelector('p').textContent.trim().toLowerCase();
-                    const nameB = b.querySelector('p').textContent.trim().toLowerCase();
-                    return nameA.localeCompare(nameB);
-                });
-            } else if (sortSelect.value === 'level') {
-                sorted = skillItems.sort((a, b) => {
-                    const levelA = parseInt(a.querySelector('.skill-progress-bar').getAttribute('data-width'));
-                    const levelB = parseInt(b.querySelector('.skill-progress-bar').getAttribute('data-width'));
-                    return levelB - levelA;
-                });
-            }
-            skillItems.forEach(item => skillsGrid.removeChild(item));
-            sorted.forEach(item => skillsGrid.appendChild(item));
-        }
-        if (skillsGrid && sortSelect) {
-            sortSelect.addEventListener('change', sortSkills);
-            window.addEventListener('DOMContentLoaded', sortSkills);
-        }
-
-        const profileImgContainer = document.getElementById('profile-img-container');
-        if (profileImgContainer) {
-            setTimeout(() => {
-                profileImgContainer.style.opacity = '1';
-            }, 2000);
-        }
-
-        // Back to Top Button logic
-        const backToTopBtn = document.getElementById('backToTop');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 300) {
-                backToTopBtn.classList.add('visible');
-            } else {
-                backToTopBtn.classList.remove('visible');
-            }
-        });
-        backToTopBtn.addEventListener('click', () => {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-            // Refresh GSAP scroll-triggered animations
-            if (window.gsap && window.ScrollTrigger) {
-                window.ScrollTrigger.refresh(true);
-            }
-        });
-        // Also refresh GSAP animations when scrolled to top manually
-        window.addEventListener('scroll', () => {
-            if (window.scrollY === 0 && window.gsap && window.ScrollTrigger) {
-                window.ScrollTrigger.refresh(true);
-            }
-        });
-    </script>
+    </style>
 </body>
 </html>
