@@ -4,6 +4,9 @@ import { useCallback, useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { CloseIcon, ArrowLeftIcon } from '@/components/icons';
 
+/** Treat these gallery entries as playable video slides. */
+const isVideo = (src: string) => /\.(mp4|webm|mov|m4v)$/i.test(src);
+
 /**
  * Full-screen image gallery (lightbox). Dependency-free, keyboard-driven:
  * Esc closes, ← / → step through. Used by both certificate previews and
@@ -106,14 +109,26 @@ export default function Lightbox({
           </button>
         )}
 
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          key={images[current]}
-          src={images[current]}
-          alt={`Gallery image ${current + 1}`}
-          onClick={(e) => e.stopPropagation()}
-          className="max-h-full max-w-full object-contain shadow-2xl motion-safe:animate-fade-up"
-        />
+        {isVideo(images[current]) ? (
+          <video
+            key={images[current]}
+            src={images[current]}
+            controls
+            autoPlay
+            playsInline
+            onClick={(e) => e.stopPropagation()}
+            className="max-h-full max-w-full object-contain shadow-2xl motion-safe:animate-fade-up"
+          />
+        ) : (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            key={images[current]}
+            src={images[current]}
+            alt={`Gallery image ${current + 1}`}
+            onClick={(e) => e.stopPropagation()}
+            className="max-h-full max-w-full object-contain shadow-2xl motion-safe:animate-fade-up"
+          />
+        )}
 
         {multiple && (
           <button

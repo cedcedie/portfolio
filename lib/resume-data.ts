@@ -83,6 +83,10 @@ export type Project = {
   featured?: boolean;
 };
 
+// Build a gallery path list for a project slug: `/projects/<slug>/<slug>-<n>.<ext>`.
+const gal = (slug: string, files: string[]) =>
+  files.map((f) => `/projects/${slug}/${slug}-${f}`);
+
 export const projects: Project[] = [
   {
     name: 'Learning Management System: Science with AR',
@@ -93,17 +97,125 @@ export const projects: Project[] = [
     tech: ['Unity', 'Vuforia', 'Blender', 'React', 'Firebase'],
     category: 'Freelance',
     featured: true,
-    // TODO: replace mock links with the real repo / live demo.
-    github: 'https://github.com/cedcedie',
-    live: 'https://example.com',
-    // Placeholder previews — replace the .svg files in /public/projects with
-    // real screenshots (keep the same names, or update the paths here).
-    cover: '/projects/ar-lms-1.svg',
+    cover: '/projects/ar-lms/ar-lms-10.png',
+    gallery: gal(
+      'ar-lms',
+      Array.from({ length: 11 }, (_, i) => `${i + 1}.png`),
+    ),
+  },
+  {
+    name: 'Hydrolar — Energy Storage Dashboard',
+    role: 'Solo Developer',
+    period: '2026',
+    description:
+      'A mobile-first energy-storage monitoring dashboard visualizing battery status, energy-source breakdown, and historical trends through interactive charts, with a weather-aware installation safety view.',
+    tech: ['React', 'Vite', 'Tailwind CSS', 'Recharts'],
+    category: 'Freelance',
+    cover: '/projects/hydrolar/hydrolar-1.png',
+    gallery: gal(
+      'hydrolar',
+      Array.from({ length: 7 }, (_, i) => `${i + 1}.png`),
+    ),
+  },
+  {
+    name: 'Cafe Management System',
+    role: 'Full-Stack Developer',
+    period: '2025',
+    description:
+      'A web-based cafe platform handling orders, deliveries, and printable receipts, with real-time order tracking synced across the kitchen and admin views over Socket.IO.',
+    tech: ['React', 'Node.js', 'Express', 'MongoDB', 'Socket.IO'],
+    category: 'Freelance',
+    cover: '/projects/cafe-web/cafe-web-5.png',
+    gallery: gal(
+      'cafe-web',
+      Array.from({ length: 6 }, (_, i) => `${i + 1}.png`),
+    ),
+  },
+  {
+    name: 'Heri-Threads',
+    role: 'Web Developer',
+    period: '2025',
+    description:
+      'A cultural showcase of Ifugao dances and traditional attire, presenting heritage content through interactive, image-rich pages built on the TALL stack.',
+    tech: ['Laravel', 'Livewire', 'Alpine.js', 'Tailwind CSS'],
+    category: 'Freelance',
+    cover: '/projects/heri-threads/heri-threads-1.png',
+    gallery: gal(
+      'heri-threads',
+      Array.from({ length: 9 }, (_, i) => `${i + 1}.png`),
+    ),
+  },
+  {
+    name: 'Cafe Ordering App',
+    role: 'Mobile Developer',
+    period: '2025',
+    description:
+      'A mobile cafe ordering app for browsing the menu and placing orders, paired with a lightweight web admin backend for managing items and incoming orders.',
+    tech: ['Kotlin', 'Express.js', 'Tailwind CSS', 'HTML'],
+    category: 'Freelance',
+    cover: '/projects/cafe-mobile/cafe-mobile-2.jpg',
+    gallery: gal(
+      'cafe-mobile',
+      Array.from({ length: 11 }, (_, i) => `${i + 1}.jpg`),
+    ),
+  },
+  {
+    name: 'Disaster Ranger',
+    role: 'Game Developer',
+    period: '2024',
+    description:
+      'A 2D disaster-preparedness game for elementary schools, teaching emergency response through interactive scenarios and hand-drawn pixel art.',
+    tech: ['Godot', 'GDScript', 'Aseprite'],
+    category: 'Freelance',
+    cover: '/projects/disaster-ranger/disaster-ranger-1.png',
+    gallery: gal(
+      'disaster-ranger',
+      Array.from({ length: 9 }, (_, i) => `${i + 1}.png`),
+    ),
+  },
+  {
+    name: 'Brick Breaker',
+    role: 'Game Developer',
+    period: '2024',
+    description:
+      'A polished brick-breaker arcade game built in Godot with hand-designed levels, escalating difficulty, and responsive paddle physics.',
+    tech: ['Godot', 'GDScript'],
+    category: 'Freelance',
+    cover: '/projects/brick-breaker/brick-breaker-1.png',
     gallery: [
-      '/projects/ar-lms-1.svg',
-      '/projects/ar-lms-2.svg',
-      '/projects/ar-lms-3.svg',
-      '/projects/ar-lms-4.svg',
+      '/projects/brick-breaker/brick-breaker-1.png',
+      '/projects/brick-breaker/brick-breaker-vid-1.mp4',
+      '/projects/brick-breaker/brick-breaker-vid-2.mp4',
+    ],
+  },
+  {
+    name: 'Germ Buster',
+    role: 'Game Developer',
+    period: '2024',
+    description:
+      'An interactive educational game teaching young students hygiene and germ awareness through playful, character-driven gameplay.',
+    tech: ['Godot', 'GDScript', 'Aseprite'],
+    category: 'Freelance',
+    cover: '/projects/germ-buster/germ-buster-1.png',
+    gallery: gal(
+      'germ-buster',
+      Array.from({ length: 3 }, (_, i) => `${i + 1}.png`),
+    ),
+  },
+  {
+    name: 'Rock Paper Scissors',
+    role: 'Game Developer',
+    period: '2024',
+    description:
+      'A fast-paced rock-paper-scissors game made in Godot with animated showdowns and running score tracking.',
+    tech: ['Godot', 'GDScript'],
+    category: 'Freelance',
+    cover: '/projects/rps/rps-1.png',
+    gallery: [
+      '/projects/rps/rps-1.png',
+      '/projects/rps/rps-2.jpg',
+      '/projects/rps/rps-3.jpg',
+      '/projects/rps/rps-vid-1.mp4',
     ],
   },
   {
