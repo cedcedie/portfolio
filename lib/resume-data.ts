@@ -149,8 +149,8 @@ export const projects: Project[] = [
     role: 'Full-Stack Developer',
     period: '2026',
     description:
-      'A cafe management system for a different client, pairing a native Android ordering app with a web admin backend for menu management and incoming orders.',
-    tech: ['Kotlin', 'Express.js', 'Tailwind CSS', 'HTML'],
+      'A cafe management system for a different client: a native Android ordering app paired with a real-time web admin dashboard. The Node.js/Express backend exposes a REST API and pushes live order updates over Socket.IO, with MongoDB storing orders, products, and receipts.',
+    tech: ['Kotlin', 'Node.js', 'Express', 'MongoDB', 'Socket.IO'],
     category: 'Freelance',
     cover: '/projects/cafe-mobile/cafe-mobile-2.jpg',
     gallery: gal(
