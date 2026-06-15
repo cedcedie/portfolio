@@ -1,15 +1,18 @@
 import Link from 'next/link';
 import ProjectCard from '@/components/ProjectCard';
-import { projects } from '@/lib/resume-data';
+import { projects, homeProjectNames } from '@/lib/resume-data';
 import { ArrowUpRight } from '@/components/icons';
 
 /**
- * Projects bento on the home page. Shows a curated set; "View all projects"
- * links to the dedicated /projects page. Featured projects span full width.
+ * Projects bento on the home page. Shows the curated `homeProjectNames` set in
+ * order; "View all projects" links to the dedicated /projects page. Featured
+ * projects span full width.
  */
 export default function Projects() {
-  // Show up to 3 on the home page; the rest live on /projects.
-  const featured = projects.slice(0, 3);
+  // Curated home-page subset, in the order listed; the rest live on /projects.
+  const featured = homeProjectNames
+    .map((name) => projects.find((p) => p.name === name))
+    .filter((p): p is (typeof projects)[number] => Boolean(p));
 
   return (
     <div id="projects" className="scroll-mt-24">

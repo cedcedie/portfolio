@@ -12,18 +12,17 @@ export const metadata: Metadata = {
 };
 
 /**
- * Dedicated projects page. Projects are grouped by `category` (Freelance /
- * Personal / Academic), each group introduced by a labeled separator, then
+ * Dedicated projects page. Projects are grouped by `category` (Academic /
+ * Freelance / Personal), each group introduced by a labeled separator, then
  * laid out in an even two-column grid of image-on-top cards (no full-width
- * spans). Empty groups are skipped, so the sections track the data.
+ * spans). Every category in `projectCategoryOrder` is shown; a group with no
+ * projects yet renders a "coming soon" placeholder.
  */
 export default function ProjectsPage() {
-  const groups = projectCategoryOrder
-    .map((category) => ({
-      category,
-      items: projects.filter((p) => p.category === category),
-    }))
-    .filter((g) => g.items.length > 0);
+  const groups = projectCategoryOrder.map((category) => ({
+    category,
+    items: projects.filter((p) => p.category === category),
+  }));
 
   return (
     <>
@@ -57,11 +56,19 @@ export default function ProjectsPage() {
               </span>
             </div>
 
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-              {items.map((project) => (
-                <ProjectCard key={project.name} project={project} />
-              ))}
-            </div>
+            {items.length > 0 ? (
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                {items.map((project) => (
+                  <ProjectCard key={project.name} project={project} />
+                ))}
+              </div>
+            ) : (
+              <div className="grid place-items-center border border-dashed border-line px-4 py-10 text-center">
+                <p className="font-mono text-[11px] uppercase tracking-label text-ink-faint">
+                  More coming soon
+                </p>
+              </div>
+            )}
           </section>
         ))}
 

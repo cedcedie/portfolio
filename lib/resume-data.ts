@@ -58,11 +58,11 @@ export const experience: Experience[] = [
 /** Section a project is grouped under on the /projects page. */
 export type ProjectCategory = 'Freelance' | 'Personal' | 'Academic';
 
-/** Render order for the grouped sections on /projects (empty groups skipped). */
+/** Render order for the grouped sections on /projects. */
 export const projectCategoryOrder: ProjectCategory[] = [
+  'Academic',
   'Freelance',
   'Personal',
-  'Academic',
 ];
 
 export type Project = {
@@ -96,7 +96,6 @@ export const projects: Project[] = [
       'AR-integrated LMS for Grade 7 Science (MATATAG Curriculum) with 24 interactive 3D models — 6 per quarter — covering atoms, cells, and states of matter. Engineered the AR pipeline in Vuforia and Unity, with a companion web app in React + Firebase.',
     tech: ['Unity', 'Vuforia', 'Blender', 'React', 'Firebase'],
     category: 'Freelance',
-    featured: true,
     cover: '/projects/ar-lms/ar-lms-10.png',
     gallery: gal(
       'ar-lms',
@@ -118,12 +117,12 @@ export const projects: Project[] = [
     ),
   },
   {
-    name: 'Cafe Management System',
-    role: 'Full-Stack Developer',
-    period: '2025',
+    name: 'Cafe Management System (Web)',
+    role: 'Web Developer',
+    period: '2026',
     description:
-      'A web-based cafe platform handling orders, deliveries, and printable receipts, with real-time order tracking synced across the kitchen and admin views over Socket.IO.',
-    tech: ['React', 'Node.js', 'Express', 'MongoDB', 'Socket.IO'],
+      'A web-based cafe management system for a client, handling orders, deliveries, and printable receipts with a PostgreSQL-backed admin dashboard.',
+    tech: ['JavaScript', 'HTML', 'CSS', 'PostgreSQL'],
     category: 'Freelance',
     cover: '/projects/cafe-web/cafe-web-5.png',
     gallery: gal(
@@ -134,7 +133,7 @@ export const projects: Project[] = [
   {
     name: 'Heri-Threads',
     role: 'Web Developer',
-    period: '2025',
+    period: '2026',
     description:
       'A cultural showcase of Ifugao dances and traditional attire, presenting heritage content through interactive, image-rich pages built on the TALL stack.',
     tech: ['Laravel', 'Livewire', 'Alpine.js', 'Tailwind CSS'],
@@ -146,11 +145,11 @@ export const projects: Project[] = [
     ),
   },
   {
-    name: 'Cafe Ordering App',
-    role: 'Mobile Developer',
-    period: '2025',
+    name: 'Cafe Management System (Web & Mobile)',
+    role: 'Full-Stack Developer',
+    period: '2026',
     description:
-      'A mobile cafe ordering app for browsing the menu and placing orders, paired with a lightweight web admin backend for managing items and incoming orders.',
+      'A cafe management system for a different client, pairing a native Android ordering app with a web admin backend for menu management and incoming orders.',
     tech: ['Kotlin', 'Express.js', 'Tailwind CSS', 'HTML'],
     category: 'Freelance',
     cover: '/projects/cafe-mobile/cafe-mobile-2.jpg',
@@ -162,7 +161,7 @@ export const projects: Project[] = [
   {
     name: 'Disaster Ranger',
     role: 'Game Developer',
-    period: '2024',
+    period: '2025',
     description:
       'A 2D disaster-preparedness game for elementary schools, teaching emergency response through interactive scenarios and hand-drawn pixel art.',
     tech: ['Godot', 'GDScript', 'Aseprite'],
@@ -176,7 +175,7 @@ export const projects: Project[] = [
   {
     name: 'Brick Breaker',
     role: 'Game Developer',
-    period: '2024',
+    period: '2025',
     description:
       'A polished brick-breaker arcade game built in Godot with hand-designed levels, escalating difficulty, and responsive paddle physics.',
     tech: ['Godot', 'GDScript'],
@@ -191,7 +190,7 @@ export const projects: Project[] = [
   {
     name: 'Germ Buster',
     role: 'Game Developer',
-    period: '2024',
+    period: '2026',
     description:
       'An interactive educational game teaching young students hygiene and germ awareness through playful, character-driven gameplay.',
     tech: ['Godot', 'GDScript', 'Aseprite'],
@@ -205,7 +204,7 @@ export const projects: Project[] = [
   {
     name: 'Rock Paper Scissors',
     role: 'Game Developer',
-    period: '2024',
+    period: '2025',
     description:
       'A fast-paced rock-paper-scissors game made in Godot with animated showdowns and running score tracking.',
     tech: ['Godot', 'GDScript'],
@@ -226,46 +225,39 @@ export const projects: Project[] = [
       'Led the team and built all 3 core systems — investigation, dialogue, and courtroom — designing the full gameplay loop simulating Philippine legal investigation and trial procedures.',
     tech: ['Godot', 'GDScript'],
     category: 'Academic',
-    github: 'https://github.com/cedcedie',
-    cover: '/projects/case-zero-1.svg',
-    gallery: [
-      '/projects/case-zero-1.svg',
-      '/projects/case-zero-2.svg',
-      '/projects/case-zero-3.svg',
-    ],
+    featured: true,
+    github: 'https://github.com/cedcedie/capstone-game-case-no-zero',
+    cover: '/projects/case-zero/case-zero-3.png',
+    gallery: gal(
+      'case-zero',
+      Array.from({ length: 8 }, (_, i) => `${i + 1}.png`),
+    ),
   },
   {
     name: 'Library Attendance & Circulation Monitoring System',
     role: 'Team Lead',
-    period: 'Jun 2025',
+    period: '2024',
     description:
-      'Led a 4-person team building a web and mobile library system with dashboards, authentication, and circulation tracking.',
-    tech: ['JavaScript', 'PHP', 'PostgreSQL', 'Android Studio'],
+      'Led a 4-person team building a web library system with dashboards, authentication, attendance logs, and circulation tracking.',
+    tech: ['PHP', 'JavaScript', 'HTML', 'CSS'],
     category: 'Academic',
-    github: 'https://github.com/cedcedie',
-    cover: '/projects/library-1.svg',
-    gallery: ['/projects/library-1.svg', '/projects/library-2.svg'],
+    github: 'https://github.com/cedcedie/Library-Attendance-And-Circulation-Monitoring',
+    cover: '/projects/library/library-1.png',
+    gallery: ['/projects/library/library-1.png'],
   },
-  // MOCK personal project — placeholder so the "Personal" section is visible on
-  // /projects. Kept last so it stays out of the home-page top-3 preview.
-  // Replace or remove once you add a real personal build.
-  {
-    name: 'Personal Portfolio',
-    role: 'Solo Developer',
-    period: 'Jun 2026',
-    description:
-      'This very site — a statically-exported Next.js portfolio with a hand-built bento layout, dark/light theming, an image lightbox, and zero UI dependencies. Built for performance and a clean editorial feel.',
-    tech: ['Next.js', 'TypeScript', 'Tailwind CSS', 'React'],
-    category: 'Personal',
-    github: 'https://github.com/cedcedie',
-    live: 'https://example.com',
-    cover: '/projects/portfolio-1.svg',
-    gallery: [
-      '/projects/portfolio-1.svg',
-      '/projects/portfolio-2.svg',
-      '/projects/portfolio-3.svg',
-    ],
-  },
+  // No Personal projects yet — the "Personal" section still renders with a
+  // "coming soon" placeholder (see app/projects/page.tsx). Add real personal
+  // builds here with `category: 'Personal'`.
+];
+
+/**
+ * The three projects shown on the home-page preview, in display order.
+ * Independent of `projects` array / category ordering — referenced by name.
+ */
+export const homeProjectNames: string[] = [
+  'Case No. Zero: A Philippine Legal Crime Narrative',
+  'Hydrolar — Energy Storage Dashboard',
+  'Learning Management System: Science with AR',
 ];
 
 export type SkillGroup = {

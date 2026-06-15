@@ -29,6 +29,9 @@ export default function ProjectCard({
   // Lightbox shows the gallery if present, otherwise just the cover.
   const lightboxImages = hasGallery ? gallery : cover ? [cover] : [];
   const hasImages = lightboxImages.length > 0;
+  // Open the lightbox on the cover image so the first frame matches the card.
+  const coverIndex = project.cover ? lightboxImages.indexOf(project.cover) : 0;
+  const startIndex = coverIndex >= 0 ? coverIndex : 0;
   const hasLinks = Boolean(project.github || project.live) || gallery.length > 1;
 
   return (
@@ -123,7 +126,7 @@ export default function ProjectCard({
       {hasImages && (
         <Lightbox
           images={lightboxImages}
-          index={galleryOpen ? 0 : null}
+          index={galleryOpen ? startIndex : null}
           onClose={() => setGalleryOpen(false)}
         />
       )}
