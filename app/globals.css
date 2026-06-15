@@ -53,7 +53,7 @@
   lightened accent so contrast stays AA in both modes.
 */
 :root {
-  --paper: #f7f7f6; /* firmer off-white so cards read as surfaces */
+  --paper: #f5f4f1; /* warm off-white paper (never pure #fff) — softer to read */
   --ink: #0a0a0a; /* 18.5:1 */
   --ink-muted: #4b4b53; /* 8.1:1 — AA body */
   --ink-faint: #57575f; /* 6.6:1 — comfortable meta/labels (was 4.63:1, thin) */
